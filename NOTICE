@@ -1,0 +1,24 @@
+LVMRP — Longitudinal Virtual Molecular Response Profiling
+Copyright 2026 IRIXEN Patho Team
+
+This product includes software developed as part of the
+IRIXEN-Patho-V1 project (2026).
+
+This repository is published as a DEFENSIVE PUBLICATION.
+The intent is to place the disclosed method in the public domain
+and to prevent any party from obtaining patent exclusivity over it.
+
+The Apache License 2.0 is applied to this repository specifically
+because its Section 3 (Grant of Patent License) further reduces the
+possibility of any party asserting patent claims over the disclosed
+content or its derivatives.
+
+Referenced third-party components (not included in this repository):
+  - H-Optimus-0 (Apache License 2.0)
+  - PyTorch (BSD-style license)
+  - NumPy (BSD-3-Clause)
+  - scikit-learn (BSD-3-Clause)
+
+Prior art boundaries and differentiation from existing work are
+documented in PRIOR_ART.md. Negative experimental evidence from the
+IRIXEN-Patho-V1 static pipeline is disclosed in README.md.
