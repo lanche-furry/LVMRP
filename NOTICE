@@ -1,24 +1,91 @@
 LVMRP — Longitudinal Virtual Molecular Response Profiling
+纵向虚拟分子响应图谱
+
 Copyright 2026 IRIXEN Patho Team
 
-This product includes software developed as part of the
-IRIXEN-Patho-V1 project (2026).
+This product includes software and documentation developed by IRIXEN Patho Team.
 
-This repository is published as a DEFENSIVE PUBLICATION.
-The intent is to place the disclosed method in the public domain
-and to prevent any party from obtaining patent exclusivity over it.
 
-The Apache License 2.0 is applied to this repository specifically
-because its Section 3 (Grant of Patent License) further reduces the
-possibility of any party asserting patent claims over the disclosed
-content or its derivatives.
+DEFENSIVE PUBLICATION NOTICE
 
-Referenced third-party components (not included in this repository):
-  - H-Optimus-0 (Apache License 2.0)
-  - PyTorch (BSD-style license)
-  - NumPy (BSD-3-Clause)
-  - scikit-learn (BSD-3-Clause)
+This repository is a DEFENSIVE PUBLICATION.
 
-Prior art boundaries and differentiation from existing work are
-documented in PRIOR_ART.md. Negative experimental evidence from the
-IRIXEN-Patho-V1 static pipeline is disclosed in README.md.
+It is published with the specific intent of placing the subject matter described
+herein — a method for predicting spatially-resolved changes in molecular state
+from H&E whole-slide images acquired at two or more time points from the same
+subject, outputting quantitative delta maps and uncertainty maps without
+generating RGB stained images — into the public domain of technical knowledge,
+and of preventing any party, including the publishers, from obtaining patent
+exclusivity over it.
+
+The publishers do not assert, and do not intend to assert, patent rights over
+the disclosed subject matter. Nothing in this repository should be read as a
+reservation of patent rights, and no patent application directed at this subject
+matter is intended.
+
+
+WHY THE APACHE LICENSE 2.0
+
+The Apache License 2.0 (see LICENSE) was chosen deliberately, and not only for
+its permissive terms. Its Section 3, "Grant of Patent License", is the operative
+clause: a party that uses, distributes, or contributes to this work receives a
+patent licence from the licensors, and a party that initiates patent litigation
+alleging that this work infringes a patent loses that licence. In the context of
+a defensive publication, this clause further weakens the position of anyone who
+might later attempt to claim exclusive rights over the disclosed approach.
+
+Section 4(d) of the same licence requires that this NOTICE file be preserved in
+redistributions, so that the defensive-publication character of the disclosure
+travels with the work.
+
+
+SCOPE OF THE DISCLOSURE
+
+The technical content is in:
+
+  README.md                 — overview, scope, and the honest disclosure of
+                              negative results in Section 4
+  TECHNICAL_DISCLOSURE.md   — enablement-level description: architecture,
+                              training pipeline, evaluation protocol, known
+                              failure modes, and the six distinguishing
+                              technical features
+  PRIOR_ART.md              — boundary against six families of prior art, on
+                              three axes: longitudinal input, delta target,
+                              non-image output
+  figures/architecture.md   — Mermaid architecture diagram
+
+
+STATUS
+
+The core hypothesis of this disclosure — that delta signals are less sensitive
+to slide-level batch effects than static signals — is UNVALIDATED. Section 4 of
+README.md records the negative experimental evidence verbatim, including a static
+H&E-to-HER2 classification that failed on a 17-slide dataset (validation tile-level
+AUC 0.27, slide-level AUC 0.25), slide-identity classification at AUC 1.0000,
+train-versus-validation domain discrimination at AUC 0.9995, a slide-identity AUC
+that moved only from 0.9994 to 0.9995 under Macenko normalisation, static virtual
+staining SFS of 0.445 (0.526 after histogram matching), and a condition sensitivity
+L1 of 0.0112.
+
+That evidence is retained deliberately. A defensive publication is useful to the
+extent that it is technically credible, and it is credible only if it reports what
+failed.
+
+
+THIRD-PARTY COMPONENTS
+
+No third-party code is vendored into this repository. The following components are
+referenced as embodiment or implementation dependencies only, and remain under
+their own licences:
+
+  H-Optimus-0      pathology foundation model used as the frozen encoder in the
+                   worked embodiment         Apache License 2.0
+  PyTorch          deep learning framework   BSD-style licence
+  NumPy            array library             BSD 3-Clause licence
+  scikit-learn     evaluation utilities      BSD 3-Clause licence
+
+Use of these components is subject to their respective licences, not to this one.
+
+
+Trademarks and names are the property of their respective owners. Mention of a
+third-party component does not imply endorsement of, or by, this project.

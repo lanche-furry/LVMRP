@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "LVMRP: Longitudinal Virtual Molecular Response Profiling"
+abstract: >-
+  A method for predicting spatially-resolved changes in molecular state
+  (e.g. delta HER2 expression, delta pathway activity, delta immune
+  infiltration) from H&E whole-slide images acquired at two or more time
+  points from the same subject, outputting quantitative delta maps and
+  uncertainty maps, without generating RGB stained images. Published as a
+  defensive publication; the core hypothesis is unvalidated and the negative
+  experimental evidence is disclosed in full.
+authors:
+  - family-names: "IRIXEN"
+    given-names: "Patho Team"
+    name: "IRIXEN Patho Team"
+version: 0.1.0
+date-released: 2026-10-18
+license: Apache-2.0
+repository-code: "https://github.com/lanche-furry/LVMRP"
+url: "https://github.com/lanche-furry/LVMRP"
+keywords:
+  - computational-pathology
+  - virtual-staining
+  - longitudinal
+  - molecular-response
+  - her2
+  - digital-pathology
+  - defensive-publication
+  - prior-art
+type: software
