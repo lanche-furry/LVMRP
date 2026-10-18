@@ -87,7 +87,7 @@
 
 ## 4. H&E → spatial molecular / quantitative protein / H&E → 空间分子 / 定量蛋白
 
-**Representative / 代表：** `US20260024360`, `US20250342588A1`, `CN122454214A`
+**Representative / 代表：** `US20260024360`, `US20250342588A1`, `CN122454214A`, `CN113316823A`, `EP3857564A1`, `US20210249101A1`
 
 **English**
 
@@ -97,7 +97,11 @@
   - The target is **Δ**, not the absolute state; a static predictor can be a component, but is not the method.
   - No synthetic image is produced at any stage.
 
-> This is the family the proposal is nearest to, and therefore the one where the boundary must be sharpest: **same output semantics, different input shape and different target.**
+> Work in this family that takes longitudinal H&E together with molecular data and predicts clinical response (resistance / survival) **outputs a clinical label**. This proposal outputs a spatially-resolved molecular change map Δ, and does **not** depend on paired H&E–IHC images for training.
+>
+> `CN113316823A` and its EP family member `EP3857564A1` are the most relevant instances: their pipeline runs H&E WSI → patch-level morphological score → **patient-level score** → treatment-outcome prediction. The distinguishing point is therefore **not** the longitudinal input but the **output level** — see §4b.
+>
+> `US20210249101A1` uses the phrase "molecular changes" for changes **relative to a reference genome** (mutation, CNV, fusion) recovered in an **unsupervised** manner. That is a different technical meaning from Δ **between two time points of the same subject**, and this disclosure states the distinction explicitly rather than relying on the wording being read narrowly.
 
 **中文**
 
@@ -107,7 +111,39 @@
   - 目标是 **Δ**，不是绝对状态；静态预测器可以作为组件，但不是方法本身。
   - 任何阶段都不产生合成图像。
 
-> 本方案与这一类最近，因此边界必须最锐利：**相同的输出语义，不同的输入形态与不同的预测目标。**
+> **该类工作从纵向 H&E + 分子数据预测临床反应（耐药/存活），输出是临床标签；本方案输出是空间分辨的分子变化图谱 Δ，且不依赖配对的 H&E-IHC 图像训练。**
+>
+> `CN113316823A` 及其 EP 同族 `EP3857564A1` 是其中最相关的实例：其流程为 H&E WSI → patch 级形态学分数 → **患者级分数** → 治疗结局预测。因此区别点**不在**纵向输入，而在**输出层级**——见 §4b。
+>
+> `US20210249101A1` 用 "molecular changes" 指**相对于参考基因组**的改变（突变、CNV、融合），且以**无监督**方式获得。这与**同一受试者两个时间点之间**的 Δ 是不同的技术含义；本公开显式写明这一区分，而不是依赖措辞被狭义解读。
+
+---
+
+## 4b. Closest prior art: longitudinal → clinical outcome prediction / 最接近的现有技术：纵向 → 临床疗效预测
+
+**Representative / 代表：** `CN113316823A` (+ `EP3857564A1`, Pathomiq), `CN121747954A` (Guangzhou Medical University, 2026-03), `US2025299802A1` (Paige AI)
+
+> **This is the closest prior art to this disclosure, and the boundary here is the sharpest in the document.** It is also the boundary most likely to be contested, because the overlap is real and lies in the *purpose* of the system, not in its plumbing.
+
+**English**
+
+| Reference | What it claims (per its claims as summarised to us) | Where this proposal stops |
+|---|---|---|
+| `CN113316823A` / `EP3857564A1` | H&E WSI → patch-level morphological score → **patient-level score** → prediction of treatment outcome | **No patient-level score and no outcome prediction are produced.** The system's output terminates at the spatial Δ map and its uncertainty map. |
+| `CN121747954A` | Pre/post-treatment **paired** slides → dynamic registration → biomarker expression change → spatial heterogeneity → fusion → **clinical efficacy prediction** | Input is **H&E**, not IHC; and the output stops at the molecular Δ map — it does not extend to an efficacy prediction. |
+| `US2025299802A1` | Digital pathology image + treatment metadata → **treatment effectiveness assessment** | No effectiveness assessment or clinical decision output; the map is a quantitative object for the reader to interpret. |
+
+The structural difference is deliberate and is stated as a negative limitation in the problem definition ([TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义)): **the system does not output a patient-level treatment-response classification, a prognostic score, or a clinical decision recommendation.**
+
+**中文**
+
+| 文献 | 其权利要求所述内容（按其要点转述） | 本方案止于何处 |
+|---|---|---|
+| `CN113316823A` / `EP3857564A1` | H&E WSI → patch 级形态学分数 → **患者级分数** → 治疗结局预测 | **不产生患者级分数，也不产生结局预测。** 系统输出终止于空间 Δ 图谱与其不确定性图。 |
+| `CN121747954A` | 治疗前后**配对**切片 → 动态配准 → 生物标志物表达变化 → 空间异质性 → 融合 → **临床疗效预测** | 输入是 **H&E**，不是 IHC；且输出停在分子 Δ 图谱，不延伸到疗效预测。 |
+| `US2025299802A1` | 数字病理图像 + 治疗元数据 → **治疗有效性评估** | 不输出有效性评估或临床决策；图谱是供读者解读的定量对象。 |
+
+这一结构差异是刻意设置的，并已在问题定义中以**否定性限定**写明（见 [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义)）：**系统不输出患者级别的治疗反应分类、预后评分或临床决策建议。**
 
 ---
 
@@ -159,7 +195,7 @@
 
 **English**
 
-Taken across all six families: **every one of them lacks at least one of the three axes.**
+Taken across all six families, plus the closest-art group in §4b: **every one of them lacks at least one of the three axes.**
 
 | Family | A. Longitudinal input | B. Delta target | C. Non-image output |
 |---|:---:|:---:|:---:|
@@ -167,16 +203,17 @@ Taken across all six families: **every one of them lacks at least one of the thr
 | 2. Unpaired virtual staining | ✗ | ✗ | ✗ |
 | 3. Label-free → virtual staining | ✗ | ✗ | ✗ |
 | 4. H&E → spatial molecular | ✗ | ✗ | ✓ |
+| 4b. Longitudinal → clinical outcome (`CN113316823A`, `CN121747954A`, `US2025299802A1`) | ✓ | ✗ (clinical label) | ✓ |
 | 5. Serial-section (Z-axis) | ✗ (depth ≠ time) | ✗ | ✗ |
 | 6. Longitudinal radiology | ✓ | ✗ (response label) | ✓ |
 
-No family holds all three. **That specific combination — longitudinal H&E input, a spatially-resolved delta target, and a non-image output — is what this disclosure publishes.**
+**This document claims no priority and no originality.** It does not assert that any element above is new, nor that the combination has never been described; §4b exists precisely because the closest art overlaps the original framing substantially. What the disclosure does is publish the specific combination — longitudinal H&E input, a spatially-resolved delta target, and a non-image output that stops short of clinical prediction — so that it enters the public domain and no party can obtain exclusivity over it.
 
-This table is an argument about combination, not about any single axis being unknown. A reader who finds prior art holding all three should read that as this boundary being wrong, and is invited to say so.
+A reader who finds prior art holding all three axes should read that as this boundary being wrong, and is invited to say so. Correcting the boundary is more useful to everyone than defending it.
 
 **中文**
 
-综观六类：**每一类都至少缺少三个轴中的一个。**
+综观六类，加上 §4b 的最接近现有技术：**每一类都至少缺少三个轴中的一个。**
 
 | 类别 | A. 纵向输入 | B. Δ 目标 | C. 非图像输出 |
 |---|:---:|:---:|:---:|
@@ -184,12 +221,13 @@ This table is an argument about combination, not about any single axis being unk
 | 2. 非配对虚拟染色 | ✗ | ✗ | ✗ |
 | 3. 无标记 → 虚拟染色 | ✗ | ✗ | ✗ |
 | 4. H&E → 空间分子 | ✗ | ✗ | ✓ |
+| 4b. 纵向 → 临床疗效（`CN113316823A`、`CN121747954A`、`US2025299802A1`） | ✓ | ✗（临床标签） | ✓ |
 | 5. 序列切片（Z 轴） | ✗（深度 ≠ 时间） | ✗ | ✗ |
 | 6. 纵向放射影像 | ✓ | ✗（响应标签） | ✓ |
 
-没有任何一类同时具备三项。**本公开置入公共领域的，正是这个特定组合——纵向 H&E 输入、空间分辨的变化量目标、非图像输出。**
+**本文件不主张任何优先权，也不主张任何独创性。** 它既不断言上述任一要素是新的，也不断言该组合从未被描述过；§4b 之所以存在，正是因为最接近的现有技术与原始定位有实质重叠。本公开所做的是把**这个特定组合**——纵向 H&E 输入、空间分辨的变化量目标、以及止于临床预测之前的非图像输出——公开置入公共领域，使任何主体都无法对其取得排他权。
 
-这张表论证的是**组合**，而不是说任一单轴未知。若读者发现了同时具备三项的现有技术，应视为本边界判断有误，并欢迎指出。
+若读者发现同时具备三个轴的现有技术，应视为本边界判断有误，并欢迎指出。**修正边界对所有人都比维护边界更有用。**
 
 ---
 

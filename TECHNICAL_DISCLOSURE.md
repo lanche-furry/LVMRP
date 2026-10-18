@@ -28,12 +28,13 @@ where
 - `ΔM_i` is a **spatially-resolved map of molecular change** over the tissue area present in both slides — for example ΔHER2 expression, Δpathway activity, or Δimmune infiltration;
 - `U_i` is a **spatially-resolved uncertainty map**: per-region variance (or an equivalent spread measure) attached to each location of `ΔM_i`.
 
-The output is quantitative and spatial. It contains **three** deliverables and **one** explicit non-deliverable:
+The output is quantitative and spatial. It contains **three** deliverables and **two** explicit non-deliverables:
 
 1. a delta map `ΔM_i` — numeric, per region;
 2. an uncertainty map `U_i` — numeric, per region;
 3. a region correspondence between `t_0` and `t_1` (implicit in the map indexing);
-4. **not** an RGB stained image. This proposal does not synthesise H&E, IHC, or any other rendered image at any stage.
+4. **not** an RGB stained image. This proposal does not synthesise H&E, IHC, or any other rendered image at any stage;
+5. **not a patient-level clinical prediction.** The system does not output a patient-level treatment-response classification, a prognostic score, or a clinical decision recommendation. Any step that aggregates a whole map into a single readout is not part of this proposal.
 
 **中文**
 
@@ -50,12 +51,13 @@ f( X_i^{t_0}, X_i^{t_1}, c_i )  →  ( ΔM_i , U_i )
 - `ΔM_i` 是两切片共有组织区域上的**空间分辨分子变化图谱**，例如 ΔHER2 表达、Δ通路活性、Δ免疫浸润；
 - `U_i` 是**空间分辨不确定性图**：在 `ΔM_i` 的每个位置上给出该区域的方差（或等价的离散度度量）。
 
-输出是定量的、空间的。交付物有**三项**，明确的**非交付物**有**一项**：
+输出是定量的、空间的。交付物有**三项**，明确的**非交付物**有**两项**：
 
 1. 变化图谱 `ΔM_i` —— 数值型，逐区域；
 2. 不确定性图 `U_i` —— 数值型，逐区域；
 3. `t_0` 与 `t_1` 之间的一致性区域对应（隐含在图谱索引中）；
-4. **不是** RGB 染色图像。本方案在任何阶段都不合成 H&E、IHC 或任何其他渲染图像。
+4. **不是** RGB 染色图像。本方案在任何阶段都不合成 H&E、IHC 或任何其他渲染图像；
+5. **不是患者级别的临床预测。** 系统不输出患者级别的治疗反应分类、预后评分或临床决策建议。任何把整幅图谱聚合成单一读数的步骤，都不属于本方案的一部分。
 
 ---
 
@@ -324,25 +326,27 @@ Results are reported as **leave-one-subject-out (LOSO)** mean ± standard deviat
 
 **English**
 
-The following six features together delimit what this disclosure puts in the public domain. Each is stated as a feature of the proposal, not as a validated benefit.
+The following seven features together delimit what this disclosure puts in the public domain. They are ordered by how sharply each one separates this proposal from the closest prior art ([PRIOR_ART §4b](PRIOR_ART.md)), not by how technically interesting each one is. Every one is stated as a feature of the proposal, not as a validated benefit.
 
-1. **Two or more time points as input.** The method consumes H&E from the same subject at ≥ 2 time points; a single-slide input is outside its scope.
-2. **Δ prediction as the target.** The learned target is the change in molecular state, not the state itself.
-3. **Non-image output.** The output is a quantitative delta map plus an uncertainty map; no RGB image is produced at any stage.
-4. **SPADE + time conditioning.** Clinical covariates are injected as per-position, multi-resolution spatial modulation rather than a global FiLM vector.
-5. **Simulated longitudinal warm-start.** Pseudo-pairs assembled from a static cohort are used explicitly as an architecture-feasibility step, with the contamination caveat attached.
-6. **Slide-identity AUC as a failure diagnostic.** The delta representation is audited for residual slide identity, with > 0.9 treated as failure.
+1. **The output stops short of clinical prediction.** No patient-level score, no response classification, no prognostic score, no clinical recommendation. The output terminates at the spatial Δ map and its uncertainty map; interpretation is left to the reader. This is the sharpest separator from `CN113316823A` / `EP3857564A1` and `CN121747954A`, whose endpoint is a clinical label.
+2. **H&E as the input modality.** Not IHC. This separates the proposal from `CN121747954A`, whose paired pre/post input is IHC.
+3. **Δ between two time points of the same subject.** Not a change relative to a reference genome (mutation, CNV, fusion) — the sense in which `US20210249101A1` uses "molecular changes".
+4. **A continuous spatial field plus per-region uncertainty.** Not a patch-level discrete score that is aggregated upward; the deliverable is a field, and its uncertainty is part of it.
+5. **Two or more time points as input.** H&E from the same subject at ≥ 2 time points; a single-slide input is outside the scope.
+6. **SPADE + time conditioning.** Clinical covariates enter as per-position, multi-resolution spatial modulation rather than a global FiLM vector.
+7. **Simulated longitudinal warm-start, and slide-identity AUC as a failure diagnostic.** Pseudo-pairs from a static cohort are used explicitly as an architecture-feasibility step with the contamination caveat attached, and the delta representation is audited for residual slide identity with > 0.9 treated as failure.
 
 **中文**
 
-以下六项共同界定本公开置入公共领域的范围。每项都表述为「本方案的特征」，而非「已验证的收益」。
+以下七项共同界定本公开置入公共领域的范围。排序依据是**与最接近现有技术（[PRIOR_ART §4b](PRIOR_ART.md)）的切割力度**，而不是技术趣味性。每项都表述为「本方案的特征」，而非「已验证的收益」。
 
-1. **≥ 2 个时间点作为输入**：方法消费同一受试者至少两个时间点的 H&E；单切片输入不在其范围内。
-2. **以 Δ 为预测目标**：学习目标是分子状态的变化量，而非状态本身。
-3. **非图像输出**：输出为定量变化图谱 + 不确定性图；任何阶段都不产生 RGB 图像。
-4. **SPADE + 时间条件**：临床协变量以逐位置、多分辨率的空间调制注入，而非全局 FiLM 向量。
-5. **模拟纵向 warm-start**：用静态队列拼出的伪对，明确作为架构可行性步骤使用，并附带污染说明。
-6. **以 slide 身份 AUC 作为失败诊断**：对 Δ 表示审计残存切片身份，> 0.9 即视为失败。
+1. **输出止于临床预测之前**：不产生患者级分数、不产生反应分类、不产生预后评分、不给出临床建议。输出终止于空间 Δ 图谱与其不确定性图，解读留给读者。这是与 `CN113316823A` / `EP3857564A1`、`CN121747954A` 区分最锐利的一点——那些方案的落脚点是临床标签。
+2. **输入模态是 H&E**：不是 IHC。这使本方案区别于 `CN121747954A`（其配对输入为治疗前后 IHC）。
+3. **Δ 是同一受试者两个时间点之间**：不是相对于参考基因组的改变（突变、CNV、融合）——后者是 `US20210249101A1` 使用 "molecular changes" 的含义。
+4. **连续空间场 + 逐区域不确定性**：不是被逐级向上聚合的 patch 级离散分数；交付物是一个场，且不确定性是其组成部分。
+5. **≥ 2 个时间点作为输入**：方法消费同一受试者至少两个时间点的 H&E；单切片输入不在其范围内。
+6. **SPADE + 时间条件**：临床协变量以逐位置、多分辨率的空间调制注入，而非全局 FiLM 向量。
+7. **模拟纵向 warm-start，以及以 slide 身份 AUC 作为失败诊断**：用静态队列拼出的伪对明确作为架构可行性步骤使用并附带污染说明；同时对 Δ 表示审计残存切片身份，> 0.9 即视为失败。
 
 ---
 

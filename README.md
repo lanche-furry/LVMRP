@@ -2,9 +2,13 @@
 
 # LVMRP — 纵向虚拟分子响应图谱
 
-> **Defensive publication.** Everything in this repository is published so that it enters the public domain of technical knowledge. The publishers do **not** retain, and do **not** intend to assert, any patent claim over the subject matter disclosed here.
+> **Defensive publication.** Everything in this repository is published so that it enters the public domain of technical knowledge. The publishers do **not** retain, and do **not** intend to assert, any patent claim over the subject matter disclosed here. This document also claims **no priority and no originality**: it does not assert that any element described here is new, nor that the combination has never been described. It exists so that no party can obtain exclusivity over the disclosed approach — nothing more.
 >
-> **防御性公开。** 本仓库的全部内容公开即视为进入公共技术知识领域。发布者**不保留**、也**不打算主张**对本文所公开内容的任何专利权。
+> **防御性公开。** 本仓库的全部内容公开即视为进入公共技术知识领域。发布者**不保留**、也**不打算主张**对本文所公开内容的任何专利权。本文件同时**不主张任何优先权，也不主张任何独创性**：它既不断言其中任一要素是新的，也不断言该组合从未被描述过。它的作用只是使任何主体都无法对该方案取得排他权——仅此而已。
+
+> **Note on acronym.** LVMRP here stands for Longitudinal Virtual Molecular Response Profiling. It is unrelated to Laparoscopic Ventral Mesh Rectopexy, which uses the same acronym in a different field.
+>
+> **缩写说明。** 此处的 LVMRP 指 Longitudinal Virtual Molecular Response Profiling（纵向虚拟分子响应图谱），与另一领域中同缩写的 Laparoscopic Ventral Mesh Rectopexy（腹腔镜腹壁网片直肠固定术）无关。
 
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Status: proposed, unvalidated](https://img.shields.io/badge/status-proposed%2C%20unvalidated-lightgrey.svg)](#4-current-evidence--honest-disclosure)
@@ -108,6 +112,9 @@ The deliberate design choice is that the condition enters through **spatial modu
 | **静态**分子状态预测 | 不接受单时点输入即给出绝对分子读数；预测目标定义为变化量 |
 | **非配对** H&E/IHC 虚拟染色 | 输出不是图像；训练依赖同一受试者的纵向配对，而非跨受试者的非配对域转换 |
 | **序列切片**（Z 轴）→ 虚拟 IHC | 时间维度是真实生物学时间（治疗前后），不是同一块的 Z 轴层切；输出不是图像 |
+| **纵向 H&E/IHC → 临床疗效预测**（`CN113316823A`、`EP3857564A1`、`CN121747954A`、`US2025299802A1`） | 本方案**不输出**患者级别的疗效预测；输出终止于空间 Δ 图谱，临床解读由使用者完成 |
+
+> 最后一行是全文最需要看清的一行：与最接近的现有技术的区别**不在**纵向输入，而在**输出是否走到临床标签**。详见 [PRIOR_ART §4b](PRIOR_ART.md)。
 
 **English**
 
@@ -117,6 +124,9 @@ The deliberate design choice is that the condition enters through **spatial modu
 | **Static** molecular-state prediction | …accept a single time point and emit an absolute molecular level; the target is defined as a change |
 | **Unpaired** H&E/IHC virtual staining | …output an image, or train on cross-subject unpaired domain translation instead of same-subject longitudinal pairs |
 | **Serial-section** (Z-axis) → virtual IHC | …treat depth as time; the time axis is real biological time (pre/post treatment), and the output is not an image |
+| **Longitudinal H&E/IHC → clinical outcome prediction** (`CN113316823A`, `EP3857564A1`, `CN121747954A`, `US2025299802A1`) | …output a patient-level efficacy prediction; the output terminates at the spatial Δ map, and clinical interpretation is left to the user |
+
+> That last row is the one to read carefully: the difference from the closest prior art is **not** the longitudinal input — it is **whether the output reaches a clinical label**. See [PRIOR_ART §4b](PRIOR_ART.md).
 
 Full analysis: [PRIOR_ART.md](PRIOR_ART.md).
 
@@ -201,6 +211,38 @@ Condition sensitivity L1 **0.0112**: changing the condition input barely changes
 The core hypothesis is that **delta signals are less sensitive to slide-level batch effects than static signals**.
 
 > **This hypothesis still awaits validation on real longitudinal data.** No real longitudinal cohort supports it today. If the hypothesis fails, the method fails.
+
+---
+
+## 4b. Implementation-risk note / 实施风险提示
+
+**中文**
+
+本公开是防御性公开，**不构成 FTO（自由实施）意见**。
+
+LVMRP 的**原始定位**——纵向 H&E → 空间 Δ 分子图谱 → 治疗反应——与部分现有专利在「纵向 + 分子变化 + 治疗反应」这一层面存在**实质重叠**，其中最贴近的是 `CN113316823A`（及其 EP 同族 `EP3857564A1`）与 `CN121747954A`。**防御性公开阻止的是「他人就你公开的内容获得专利」，并不阻止「你实施时落入他人已有专利」——这两件事必须分开处理。**
+
+当前设计通过把**输出限定为空间 Δ 图谱、不生成患者级别的临床预测**来降低字面重叠风险（见 [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义) 的否定性限定与 §5 的区别特征排序），但：
+
+- 这是基于**当前检索到的权利要求字面**所做的边界判断，**不是 FTO 结论**，也不能保证未来不被其他专利覆盖；
+- 「不输出患者级预测」这一规避点，在实际实施中是否会被认定为「实质上的治疗反应预测」（例如使用者直接把图谱的聚合读数当作预测使用），**存在解释空间**；
+- `CN113316823A`、`CN121747954A` 的审查历史、同族专利与尚未公开的后续申请，需要由专利专业人士做完整的权利要求对照。
+
+**因此：若要真正实施 LVMRP（而非仅作防御性公开），在投入研发之前，应针对 `CN113316823A` 的权利要求做一次正式 FTO 分析。**
+
+**English**
+
+This disclosure is a defensive publication. It is **not a freedom-to-operate (FTO) opinion**.
+
+The **original framing** of LVMRP — longitudinal H&E → spatial Δ molecular map → treatment response — overlaps **substantially** with existing patents at the level of "longitudinal + molecular change + treatment response". The closest are `CN113316823A` (and its EP family member `EP3857564A1`) and `CN121747954A`. **A defensive publication prevents others from patenting what you published; it does not prevent you from infringing an existing patent when you implement. Those are separate problems.**
+
+The current design reduces the literal overlap by **limiting the output to spatial Δ maps and generating no patient-level clinical prediction** (see the negative limitation in [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义) and the feature ordering in §5). However:
+
+- this is a boundary judgement based on **the claim language retrieved so far** — it is **not an FTO conclusion**, and it cannot guarantee that other patents will not apply;
+- whether "no patient-level output" holds up in practice as a genuine limitation, rather than being read as an *effective* treatment-response prediction (for instance when a user aggregates a map into a single readout and treats it as one), **is open to interpretation**;
+- the prosecution history, family members, and unpublished continuations of `CN113316823A` and `CN121747954A` require a full claim-by-claim comparison by a qualified patent professional.
+
+**In short: if LVMRP is to be implemented rather than merely published defensively, a formal FTO analysis against the claims of `CN113316823A` should precede any development effort.**
 
 ---
 
