@@ -348,6 +348,40 @@ The following seven features together delimit what this disclosure puts in the p
 6. **SPADE + 时间条件**：临床协变量以逐位置、多分辨率的空间调制注入，而非全局 FiLM 向量。
 7. **模拟纵向 warm-start，以及以 slide 身份 AUC 作为失败诊断**：用静态队列拼出的伪对明确作为架构可行性步骤使用并附带污染说明；同时对 Δ 表示审计残存切片身份，> 0.9 即视为失败。
 
+### 5.1 Boundary stated in claim-style language / 用权利要求式语言陈述边界
+
+**English**
+
+The features above are prose. Because the boundary against the closest art turns entirely on the **output level**, it is restated below as a single independent limitation plus dependent features, so that the scope this disclosure places in the public domain is unambiguous. **This is a description of the disclosed subject matter, not a patent claim and not a legal opinion.**
+
+> **Independent limitation.** A method for generating a spatially-resolved map of molecular state change from H&E whole-slide images acquired at **two or more time points from the same subject**, comprising: encoding the image at each time point with a **frozen** pathology foundation model; and generating, with a condition decoder, a **spatially-resolved delta map and a per-region uncertainty map**; **wherein the output does not include a patient-level treatment-response classification, a resistance determination, or a prognostic score.**
+
+> **Dependent features.** (a) the condition decoder applies SPADE-style spatial modulation rather than global FiLM; (b) delta is defined as the change **between two time points of the same subject**, expressly distinct from a change relative to a normal reference genome; (c) the output terminates at the map level and clinical interpretation is performed by the user; (d) the evaluation protocol treats slide-identity AUC on the delta representation as a failure diagnostic.
+
+**Wording discipline.** The following substitutions are deliberate, not cosmetic. Each removes a phrase that would describe the system as a clinical predictor:
+
+| Avoid | Use instead |
+|---|---|
+| "predicting patient response to therapy" | "generating spatial maps of molecular state changes for research interpretation" |
+| "treatment effectiveness assessment" | "longitudinal molecular change mapping" |
+| "clinical decision support" | "research-use visualization and quantification" |
+
+**中文**
+
+上面的特征是散文表述。由于与最接近现有技术的边界**完全取决于输出层级**，这里用"一条独立限定 + 若干从属特征"重述一次，使本公开置入公共领域的范围没有歧义。**这是对所公开主题的描述，不是专利权利要求，也不是法律意见。**
+
+> **独立限定。** 一种从同一受试者至少两个时间点的 H&E 全切片图像生成空间分辨分子状态变化图谱的方法，包括：用**冻结的**病理基础模型编码每个时间点的图像；用条件解码器生成**空间分辨的 Δ 图谱和逐区域不确定性图**；**其中所述输出不包含患者级别的治疗反应分类、耐药性判断或预后评分。**
+
+> **从属特征。** （a）条件解码器采用 SPADE 式空间调制，而非全局 FiLM；（b）Δ 定义为**同一受试者两个时间点之间**的变化，明确区别于相对于正常参考基因组的改变；（c）输出终止于图谱层面，临床解读由使用者完成；（d）评估协议以 Δ 表示上的 slide 身份 AUC 作为失败诊断指标。
+
+**措辞纪律。** 下列替换是刻意的，不是润色。每一条都移除了会把系统描述成临床预测器的措辞：
+
+| 避免 | 改用 |
+|---|---|
+| "predicting patient response to therapy"（预测患者治疗反应） | "generating spatial maps of molecular state changes for research interpretation"（生成供研究解读的分子状态变化空间图谱） |
+| "treatment effectiveness assessment"（治疗有效性评估） | "longitudinal molecular change mapping"（纵向分子变化图谱化） |
+| "clinical decision support"（临床决策支持） | "research-use visualization and quantification"（研究用可视化与定量） |
+
 ---
 
 ## 6. Known failure modes and open questions / 已知失败模式与开放问题

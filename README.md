@@ -220,29 +220,35 @@ The core hypothesis is that **delta signals are less sensitive to slide-level ba
 
 本公开是防御性公开，**不构成 FTO（自由实施）意见**。
 
-LVMRP 的**原始定位**——纵向 H&E → 空间 Δ 分子图谱 → 治疗反应——与部分现有专利在「纵向 + 分子变化 + 治疗反应」这一层面存在**实质重叠**，其中最贴近的是 `CN113316823A`（及其 EP 同族 `EP3857564A1`）与 `CN121747954A`。**防御性公开阻止的是「他人就你公开的内容获得专利」，并不阻止「你实施时落入他人已有专利」——这两件事必须分开处理。**
+LVMRP 的**原始定位**——纵向 H&E → 空间 Δ 分子图谱 → 治疗反应——与部分现有专利在「纵向 + 分子变化 + 治疗反应」这一层面存在**实质重叠**，其中最贴近的是 `CN113316823A`（罗氏 / Pathomiq，及其 EP 同族 `EP3857564A1`，**当前状态 Pending**）与 `CN121747954A`。`CN113316823A` 的权利要求 1 实质为：分子数据 + 活检图像数据（含 H&E）→ 机器学习**临床预测**（铂类耐药、存活率），说明书 [0022] 更明确覆盖"随时间的患者治疗反应分析"。**防御性公开阻止的是「他人就你公开的内容获得专利」，并不阻止「你实施时落入他人已有专利」——这两件事必须分开处理。**
 
-当前设计通过把**输出限定为空间 Δ 图谱、不生成患者级别的临床预测**来降低字面重叠风险（见 [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义) 的否定性限定与 §5 的区别特征排序），但：
+当前设计通过把**输出限定为空间 Δ 图谱、不生成患者级别的临床预测**来降低字面重叠风险（见 [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义) 的否定性限定、§5 的区别特征排序与 §5.1 的权利要求式边界），但：
 
 - 这是基于**当前检索到的权利要求字面**所做的边界判断，**不是 FTO 结论**，也不能保证未来不被其他专利覆盖；
-- 「不输出患者级预测」这一规避点，在实际实施中是否会被认定为「实质上的治疗反应预测」（例如使用者直接把图谱的聚合读数当作预测使用），**存在解释空间**；
-- `CN113316823A`、`CN121747954A` 的审查历史、同族专利与尚未公开的后续申请，需要由专利专业人士做完整的权利要求对照。
+- `CN113316823A` 状态为 **Pending**，最终授权权利要求可能与公开版本不同；
+- `CN121747954A` 的权利要求全文尚未逐条核查；
+- 「不输出患者级预测」这一规避点，在实际实施中是否会被认定为「实质上的治疗反应预测」（例如使用者直接把图谱的聚合读数当作预测使用），**存在解释空间**。
 
 **因此：若要真正实施 LVMRP（而非仅作防御性公开），在投入研发之前，应针对 `CN113316823A` 的权利要求做一次正式 FTO 分析。**
+
+另需说明：**"纵向 H&E + 分子轨迹"这个方向在本公开之前已见于公开文献**（见 [PRIOR_ART §4c](PRIOR_ART.md)）。本公开不对该方向主张任何优先权；这些文献反而压缩了他人就该宽泛方向圈占专利的空间。
 
 **English**
 
 This disclosure is a defensive publication. It is **not a freedom-to-operate (FTO) opinion**.
 
-The **original framing** of LVMRP — longitudinal H&E → spatial Δ molecular map → treatment response — overlaps **substantially** with existing patents at the level of "longitudinal + molecular change + treatment response". The closest are `CN113316823A` (and its EP family member `EP3857564A1`) and `CN121747954A`. **A defensive publication prevents others from patenting what you published; it does not prevent you from infringing an existing patent when you implement. Those are separate problems.**
+The **original framing** of LVMRP — longitudinal H&E → spatial Δ molecular map → treatment response — overlaps **substantially** with existing patents at the level of "longitudinal + molecular change + treatment response". The closest are `CN113316823A` (Roche / Pathomiq, and its EP family member `EP3857564A1`, **currently Pending**) and `CN121747954A`. Claim 1 of `CN113316823A` is in substance: molecular data + biopsy image data (including H&E) → machine-learning **clinical prediction** (platinum resistance; survival), and its specification at [0022] explicitly covers "patient treatment response analysis over time". **A defensive publication prevents others from patenting what you published; it does not prevent you from infringing an existing patent when you implement. Those are separate problems.**
 
-The current design reduces the literal overlap by **limiting the output to spatial Δ maps and generating no patient-level clinical prediction** (see the negative limitation in [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义) and the feature ordering in §5). However:
+The current design reduces the literal overlap by **limiting the output to spatial Δ maps and generating no patient-level clinical prediction** (see the negative limitation in [TECHNICAL_DISCLOSURE §1](TECHNICAL_DISCLOSURE.md#1-problem-definition--问题定义), the feature ordering in §5, and the claim-style boundary in §5.1). However:
 
 - this is a boundary judgement based on **the claim language retrieved so far** — it is **not an FTO conclusion**, and it cannot guarantee that other patents will not apply;
-- whether "no patient-level output" holds up in practice as a genuine limitation, rather than being read as an *effective* treatment-response prediction (for instance when a user aggregates a map into a single readout and treats it as one), **is open to interpretation**;
-- the prosecution history, family members, and unpublished continuations of `CN113316823A` and `CN121747954A` require a full claim-by-claim comparison by a qualified patent professional.
+- `CN113316823A` is **Pending**: its granted claims may differ from the published version;
+- the claims of `CN121747954A` have not been compared line by line;
+- whether "no patient-level output" holds up in practice as a genuine limitation, rather than being read as an *effective* treatment-response prediction (for instance when a user aggregates a map into a single readout and treats it as one), **is open to interpretation**.
 
 **In short: if LVMRP is to be implemented rather than merely published defensively, a formal FTO analysis against the claims of `CN113316823A` should precede any development effort.**
+
+One further point: **the "longitudinal H&E + molecular trajectory" direction was already present in the public literature before this release** (see [PRIOR_ART §4c](PRIOR_ART.md)). This disclosure claims no priority over that direction; those publications weaken, rather than support, any attempt by anyone to claim the broad direction.
 
 ---
 
