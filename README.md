@@ -20,7 +20,6 @@
 | Release date / 发布日 | 2026-10-18 |
 | Author / 作者 | IRIXEN Patho Team |
 | Code license / 代码许可 | Apache License 2.0 |
-| Text license / 文字许可（可选） | CC BY 4.0 |
 | Nature / 性质 | Defensive publication / 防御性公开 |
 
 ---
