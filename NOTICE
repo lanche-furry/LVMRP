@@ -24,6 +24,26 @@ reservation of patent rights, and no patent application directed at this subject
 matter is intended.
 
 
+SCOPE OF THIS NOTICE — AND WHAT IT DOES NOT DO
+
+This notice addresses one question only: the patentability of the subject matter
+disclosed here. Its operation is erga omnes — it bears on whether anyone,
+including the publishers, can obtain exclusive rights over what is disclosed —
+and it is independent of whether the publishers ever implement anything.
+
+This notice is NOT a freedom-to-operate opinion and says nothing about whether
+implementing the described approach would infringe any patent owned by a third
+party. Those are separate legal questions and they are not in tension: a third
+party may accept that this disclosure is a valid defensive publication and still
+assert that a given implementation falls within the claims of a separate patent
+of theirs. The inference "this was published, therefore implementing it does not
+infringe" is incorrect, and nothing in this repository relies on it.
+
+Before any productisation, a knock-out search or a full freedom-to-operate
+analysis against the closest prior art — identified in PRIOR_ART.md as
+CN113316823A and CN121747954A — is required. That analysis is not provided here.
+
+
 WHY THE APACHE LICENSE 2.0
 
 The Apache License 2.0 (see LICENSE) was chosen deliberately, and not only for

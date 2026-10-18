@@ -382,6 +382,36 @@ The features above are prose. Because the boundary against the closest art turns
 | "treatment effectiveness assessment"（治疗有效性评估） | "longitudinal molecular change mapping"（纵向分子变化图谱化） |
 | "clinical decision support"（临床决策支持） | "research-use visualization and quantification"（研究用可视化与定量） |
 
+### 5.2 The limitation is architectural, not just textual / 这一限定是架构性的，不只是措辞性的
+
+**English**
+
+Whether "the system does not output a patient-level prediction" is a strong position or a weak one depends **entirely on the architecture**, not on how the document is worded. Two designs are worth distinguishing, and this disclosure commits to the second:
+
+| | Weak position | Stronger position — **what this proposal specifies** |
+|---|---|---|
+| Aggregation path | the system exposes a scalar summary — a mean-pool readout, a slide-level score, an export button that yields one number | **no aggregation path exists at all**: the output layer emits a spatial field and a per-region uncertainty field, and nothing in the architecture computes a slide-level scalar |
+| What the user must do | one click, or one call | write their own aggregation code |
+| Effect | a third party can argue the system *effectively* outputs a patient-level conclusion | the act that produces a patient-level number is the user's, not the system's |
+
+Concretely, this proposal specifies that the output layer contains **no** scalar-summary head, **no** slide-level scoring function, and **no** export that reduces a map to a single number. Any readout at subject level requires code the user writes, outside the system.
+
+**This is still not immunity.** A third party can argue that the design intent is for users to aggregate, and that the distinction is formal rather than substantive. The point of stating it here is that the argument is *available*, and that it should be fixed **at design time** rather than retrofitted after an FTO opinion arrives — an architecture with no aggregation path cannot be accused of shipping one.
+
+**中文**
+
+"系统不输出患者级预测"这句话是强还是弱，**完全取决于架构**，不取决于文档怎么写。有两种设计值得区分，本公开选择后者：
+
+| | 弱抗辩 | 较强抗辩 —— **本方案规定的是这一种** |
+|---|---|---|
+| 聚合通路 | 系统提供标量汇总——mean pooling 读数、slide 级分数、一键导出单个数字 | **架构上不存在聚合通路**：输出层只产生空间场与逐区域不确定性场，架构中没有任何环节计算 slide 级标量 |
+| 用户需要做什么 | 一次点击、一次调用 | 自己写聚合代码 |
+| 效果 | 对方可主张系统**实质上**输出了患者级结论 | 产生患者级数字的动作属于用户，不属于系统 |
+
+具体而言，本方案规定输出层**不含**标量汇总头、**不含** slide 级评分函数、**不含**把图谱归约为单数的导出。任何受试者级别的读数都需要用户自己写代码、在系统之外完成。
+
+**这仍然不是免疫。** 对方仍可主张设计意图就是让用户聚合，而这一区分是形式上的而非实质上的。把它写在这里的意义是：这个抗辩是**可用的**，而且应当在**设计阶段**就定下来，而不是等 FTO 结论出来再改架构——一个不存在聚合通路的架构，无法被指控"发布了聚合通路"。
+
 ---
 
 ## 6. Known failure modes and open questions / 已知失败模式与开放问题

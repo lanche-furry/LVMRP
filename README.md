@@ -231,6 +231,22 @@ LVMRP 的**原始定位**——纵向 H&E → 空间 Δ 分子图谱 → 治疗�
 
 **因此：若要真正实施 LVMRP（而非仅作防御性公开），在投入研发之前，应针对 `CN113316823A` 的权利要求做一次正式 FTO 分析。**
 
+> **本公开是防御性公开，不构成 FTO 意见。文档中的"不输出患者级预测"是产品设计约束，不是法律屏障。产品化前必须针对 CN113316823A、CN121747954A 做 knock-out search 或完整 FTO 分析。防御性公开阻止的是他人就本公开内容获得专利，不能替代对已授权专利的实施风险评估。**
+
+**为什么这两件事不能互相替代。** 防御性公开的作用域是**新颖性**——它阻止他人就本公开的内容获得专利，这个作用域是**对世**的，与发布者日后是否实施无关。FTO 的作用域是**实施**——它判断按某个方案做产品时是否落入他人**已授权**的权利要求，这个作用域是**对实施者**的，与本公开无关。两者在法律上并不矛盾：**对方完全可以承认你的防御性公开有效，同时主张你实施的方案落入他的另一件专利。** 因此"我公开了，所以我不侵权"这个推理是错的，本文件不隐含这一推理。
+
+**务实路径：先 knock-out，不做全量 FTO。** 完整 FTO 通常数万至十余万元、数周时间，在 PoC 阶段不现实。更有性价比的做法是先做一次**knock-out search**：
+
+| 项 | 内容 |
+|---|---|
+| 目标 | 仅两件：`CN113316823A`、`CN121747954A` |
+| 方法 | 逐条权利要求对照 LVMRP 设计，判断是否**每一项**特征都被满足 |
+| 通过条件 | 若"患者级临床预测"这一特征不被满足 → knock-out 通过，可继续推进 |
+| 未通过 | 回到设计层：改输出形式，或寻求许可 |
+| 成本/周期 | 约数千至一两万元人民币，一周内出结论 |
+
+这属于产品化前的必要支出，不是可选项。
+
 另需说明：**"纵向 H&E + 分子轨迹"这个方向在本公开之前已见于公开文献**（见 [PRIOR_ART §4c](PRIOR_ART.md)）。本公开不对该方向主张任何优先权；这些文献反而压缩了他人就该宽泛方向圈占专利的空间。
 
 **English**
@@ -247,6 +263,22 @@ The current design reduces the literal overlap by **limiting the output to spati
 - whether "no patient-level output" holds up in practice as a genuine limitation, rather than being read as an *effective* treatment-response prediction (for instance when a user aggregates a map into a single readout and treats it as one), **is open to interpretation**.
 
 **In short: if LVMRP is to be implemented rather than merely published defensively, a formal FTO analysis against the claims of `CN113316823A` should precede any development effort.**
+
+> **This disclosure is a defensive publication and does not constitute an FTO opinion. "No patient-level prediction" is a product-design constraint, not a legal shield. Before productisation, a knock-out search or a full FTO analysis against `CN113316823A` and `CN121747954A` is required. A defensive publication prevents others from patenting what is disclosed here; it cannot substitute for an infringement assessment of already-granted patents.**
+
+**Why the two cannot substitute for each other.** A defensive publication operates on **novelty** — it prevents others from patenting what is published here, and it does so *erga omnes*, independently of whether the publisher ever implements anything. FTO operates on **implementation** — it asks whether building a given design falls inside someone's **granted** claims, and it applies *to the implementer*, independently of what was published. The two are not in tension: **a third party can accept that your defensive publication is valid and still assert that your implementation falls inside a separate patent of theirs.** The inference "I published it, therefore I do not infringe" is wrong, and this document does not rely on it.
+
+**A pragmatic route: knock-out first, full FTO later.** A complete FTO opinion typically costs tens of thousands of RMB and takes weeks, which is not realistic at PoC stage. A **knock-out search** is the cheaper first step:
+
+| Item | Content |
+|---|---|
+| Targets | Two only: `CN113316823A`, `CN121747954A` |
+| Method | Claim-by-claim comparison against the LVMRP design; test whether **every** feature is met |
+| Pass condition | If the "patient-level clinical prediction" feature is not met → knock-out passes, proceed |
+| Fail | Return to the design: change the output form, or seek a licence |
+| Cost / time | Roughly a few thousand to ~20k RMB, conclusion within a week |
+
+This is a necessary pre-productisation expense, not an optional one.
 
 One further point: **the "longitudinal H&E + molecular trajectory" direction was already present in the public literature before this release** (see [PRIOR_ART §4c](PRIOR_ART.md)). This disclosure claims no priority over that direction; those publications weaken, rather than support, any attempt by anyone to claim the broad direction.
 
