@@ -242,7 +242,7 @@ This limitation is stated here deliberately, because a warm-start result is easy
 
 在真实纵向数据出现之前，可用静态数据集构造**模拟纵向**配对：把同一受试者的一张切片指派为 `t_0`、另一张为 `t_1`，形成伪对 `A → t_0, B → t_1`。
 
-> **这只验证架构可行性，不验证生物学假设。** 伪对的「变化量」在一阶近似下就是*两张切片之差*，而这恰是本方法本应对其鲁棒的 slide 级批次效应。因此伪对的 Δ 被切片指纹污染，在其上得到的任何指标都不能说明真实 Δ 是否可预测。
+> **只能验证架构可行性，不能验证生物学假设。** 伪对的「变化量」在一阶近似下就是*两张切片之差*，而这恰是本方法本应对其鲁棒的 slide 级批次效应。因此伪对的 Δ 被切片指纹污染，在其上得到的任何指标都不能说明真实 Δ 是否可预测。
 
 这条限制写在这里是刻意的，因为 warm-start 的结果很容易被过度解读。
 
@@ -354,6 +354,7 @@ The following six features together delimit what this disclosure puts in the pub
 
 - **Slide fingerprint.** Slide identity is highly predictable from features (AUC **1.0000**), and colour normalisation does not remove it (**0.9994 → 0.9995**). A delta model that inherits this representation inherits the problem.
 - **Condition collapse.** Condition sensitivity L1 **0.0112**: the conditioning input can be effectively ignored. SPADE modulation is the proposed countermeasure and is itself unvalidated.
+- **Static synthesis is no fallback either.** The static route's staining fidelity was itself poor: SFS **0.445**, rising only to **0.526** after histogram matching. A reader might ask why not simply synthesise the post-treatment stain and subtract; these numbers are the answer — image-space synthesis is not a viable substitute for a delta predictor at this quality level.
 - **Label noise.** Per-time-point molecular measurements carry their own assay variability, which propagates straight into `ΔM_true`.
 
 **Open questions** — deliberately left open:
@@ -368,6 +369,7 @@ The following six features together delimit what this disclosure puts in the pub
 
 - **切片指纹**：切片身份可从特征高度预测（AUC **1.0000**），颜色归一化无法去除（**0.9994 → 0.9995**）。继承了该表示的 Δ 模型会继承该问题。
 - **条件塌缩**：条件敏感度 L1 **0.0112**，条件输入可能被实际忽略。SPADE 调制是提出的对策，其本身尚未验证。
+- **静态合成也不是退路**：静态路线的染色保真度本身就很差——SFS **0.445**，直方图匹配后仅升至 **0.526**。读者可能问：为何不直接合成治疗后染色再做差？这组数字就是答案——在当前质量水平下，图像空间合成不能替代 Δ 预测器。
 - **标签噪声**：逐时间点分子测量自带检测变异，会直接传播进 `ΔM_true`。
 
 **开放问题** —— 刻意留白：
